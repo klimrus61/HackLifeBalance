@@ -19,9 +19,9 @@ urlpatterns = [
     path("internal-data/", admin.site.urls),
     path("api/v1/", include("api.urls"), name="api"),
 
-    # path('api/v1/auth/', include('djoser.urls'), name="base_auth"),
+    path('api/v1/auth/', include('djoser.urls'), name="base_auth"),
     path('api/v1/auth/', include('djoser.urls.jwt'), name="token"),
-    # path('api/v1/auth/', include('djoser.social.urls'), name="google_auth"),
+    path('api/v1/auth/', include('djoser.social.urls'), name="google_auth"),
     # path("auth/", include("djoser.urls"), name="users"),
     # path("auth/", include("djoser.urls.authtoken"), name="token_auth"),
 ]
