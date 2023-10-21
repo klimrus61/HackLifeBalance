@@ -11,6 +11,7 @@ from drf_spectacular.views import (
 
 urlpatterns = [
     path("internal-data/", admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path("auth/", include("djoser.urls"), name="users"),
     path("auth/", include("djoser.urls.authtoken"), name="token_auth"),
     path("api/v1/", include(("api.urls", "api"), namespace="api"), name="api"),
