@@ -8,16 +8,21 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from . import views
 
 urlpatterns = [
+    path(
+        route="",
+        view=views.health_check,
+        name="health_checker",
+    ),
     path("internal-data/", admin.site.urls),
-    # path('accounts/', include('allauth.urls'), name="accounts"),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
-    path('auth/', include('djoser.social.urls')),
+    path('api/v1/auth/', include('djoser.urls'), name="base_auth"),
+    path('api/v1/auth/', include('djoser.urls.jwt'), name="token"),
+    path('api/v1/auth/', include('djoser.social.urls'), name="google_auth"),
     # path("auth/", include("djoser.urls"), name="users"),
     # path("auth/", include("djoser.urls.authtoken"), name="token_auth"),
-    path("api/v1/", include(("api.urls", "api"), namespace="api"), name="api"),
+    path("api/v1/", include("api.urls"), name="api"),
 ]
 
 urlpatterns += [
