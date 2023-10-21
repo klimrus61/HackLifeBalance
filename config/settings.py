@@ -129,11 +129,14 @@ SPECTACULAR_SETTINGS = {
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USERNAME"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOSTNAME"),
+        "PORT": env("DB_PORT"),
+    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

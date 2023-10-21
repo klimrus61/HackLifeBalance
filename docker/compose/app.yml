@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: hack_backend
+    image: hack_backend
+    restart: unless-stopped
+    build:
+      context: ${PWD}
+      dockerfile: docker/Dockerfile
+    command: >
+      bash -c "python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - ${APP_PORT}:8000
+    volumes:
+      - ${PWD}/:/app
+    env_file:
+      - ${PWD}/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - hacklife-balance-net
+
+
+networks:
+  hacklife-balance-net:
+    driver: bridge
