@@ -155,3 +155,5 @@ requirements.txt
 
 #ruff
 .ruff_cache
+
+old code/
