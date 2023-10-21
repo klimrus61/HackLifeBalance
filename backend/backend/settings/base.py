@@ -37,19 +37,20 @@ INSTALLED_APPS = [
     "mdeditor",
     'social_django',
     'rest_framework_simplejwt',
-    'rest_framework_simplejwt.token_blacklist'
+    'rest_framework_simplejwt.token_blacklist',
+    "meetings",
     
 ]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    # "django.middleware.security.SecurityMiddleware",
+    "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    # "django.middleware.common.CommonMiddleware",
-    # "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    # "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
@@ -188,37 +189,38 @@ SIMPLE_JWT = {
 
 
 # Djoser
-DJOSER = {
-    'LOGIN_FIELD': 'email',
-    'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://127.0.0.1:3000', 'http://127.0.0.1:3000/home','http://127.0.0.1:3000/login'],
-    "SERIALIZERS": {
-        "current_user": "users.serializers.UserSerializer"
-    },
-    "PERMISSIONS":  {
-        'activation': ['rest_framework.permissions.IsAdminUser'],
-        'user_create': ['rest_framework.permissions.IsAdminUser'],
-        'user_delete': ['rest_framework.permissions.IsAdminUser'],
-        'username_reset': ['rest_framework.permissions.IsAdminUser'],
-        'username_reset_confirm': ['rest_framework.permissions.IsAdminUser'],
-        'set_username': ['rest_framework.permissions.IsAdminUser'],
-        'password_reset': ['rest_framework.permissions.IsAdminUser'],
-        'password_reset_confirm': ['rest_framework.permissions.IsAdminUser'],
-        'set_password': ['rest_framework.permissions.IsAdminUser'],
-    }
-}
+# DJOSER = {
+#     'LOGIN_FIELD': 'email',
+#     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
+#     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://127.0.0.1:8000', 'http://127.0.0.1:8000','http://127.0.0.1:8000/login'],
+#     "SERIALIZERS": {
+#         # "current_user": "users.serializers.UserSerializer"
+#     },
+#     "PERMISSIONS":  {
+#         'activation': ['rest_framework.permissions.IsAdminUser'],
+#         'user_create': ['rest_framework.permissions.IsAdminUser'],
+#         'user_delete': ['rest_framework.permissions.IsAdminUser'],
+#         'username_reset': ['rest_framework.permissions.IsAdminUser'],
+#         'username_reset_confirm': ['rest_framework.permissions.IsAdminUser'],
+#         'set_username': ['rest_framework.permissions.IsAdminUser'],
+#         'password_reset': ['rest_framework.permissions.IsAdminUser'],
+#         'password_reset_confirm': ['rest_framework.permissions.IsAdminUser'],
+#         'set_password': ['rest_framework.permissions.IsAdminUser'],
+#     }
+# }
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend'
-)
+# # AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.google.GoogleOAuth2',
+#     'django.contrib.auth.backends.ModelBackend',
+#     'rest_framework_simplejwt.authentication.JWTAuthentication',
+# )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '514415217914-v3v159jsigrgs6dirmg5p2g9a2q5lo5v.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '514415217914-v3v159jsigrgs6dirmg5p2g9a2q5lo5v.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
-    'openid'
-]
-SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+#     'https://www.googleapis.com/auth/userinfo.email',
+#     'https://www.googleapis.com/auth/userinfo.profile',
+#     'openid'
+# ]
+# SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
