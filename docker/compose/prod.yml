@@ -38,8 +38,13 @@ services:
 
   backend:
     container_name: backend
-    image: skillgetrstu/learning_platform_rstu:latest
+    image: hack_backend
+    build:
+      context: ${PWD}
+      dockerfile: docker/Dockerfile
     restart: always
+    volumes:
+      - ${PWD}/:/app
     env_file: ${PWD}/.env
     command: sh -c "
       python manage.py collectstatic --noinput &&
