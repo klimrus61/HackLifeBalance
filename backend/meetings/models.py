@@ -1,9 +1,6 @@
 from django.db import models
 from django.utils.text import gettext_lazy as _
 
-from core.constants.meetings import GroupType
-from core.utils.django_utils import get_choices_with_lazy_text
-
 
 class Meeting(models.Model):
     title = models.CharField(
@@ -14,10 +11,15 @@ class Meeting(models.Model):
     meeting_theme = models.ForeignKey(
         "MeetingType",
         verbose_name=_("lecturer"),
-        help_text=_("please chose lecturer for this group"),
-        related_name="lecturer_meetings",
+        help_text=_("please chose theme for this meeting"),
+        related_name="theme_meetings",
         null=True,
         on_delete=models.SET_NULL,
+    )
+    image = models.ImageField(
+        upload_to='/meetings', 
+        height_field=100, 
+        width_field=100
     )
     meeting_link = models.URLField(
         _("meeting link"),
@@ -39,7 +41,7 @@ class Meeting(models.Model):
     lecturer = models.ForeignKey(
         "users.User",
         verbose_name=_("lecturer"),
-        help_text=_("please chose lecturer for this group"),
+        help_text=_("please chose lecturer for this meeting"),
         related_name="lecturer_meetings",
         null=True,
         on_delete=models.SET_NULL,
