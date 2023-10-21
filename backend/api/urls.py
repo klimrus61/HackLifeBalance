@@ -1,3 +1,5 @@
 from django.urls import include, path
 
-urlpatterns = []
+urlpatterns = [
+    path("meetings/", include("meetings.urls"), name="meetings"),
+]

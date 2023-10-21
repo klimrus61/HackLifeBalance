@@ -17,7 +17,7 @@ class Meeting(models.Model):
         on_delete=models.SET_NULL,
     )
     image = models.ImageField(
-        upload_to='/meetings', 
+        upload_to='meetings/', 
         height_field=100, 
         width_field=100
     )
