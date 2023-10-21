@@ -31,8 +31,9 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True')
         return self.create_user(email, password, **kwargs)
     
-    
+
 class User(AbstractBaseUser, PermissionsMixin):
+    username = None
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)

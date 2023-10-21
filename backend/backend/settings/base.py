@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -28,7 +29,7 @@ INSTALLED_APPS = [
     "django_filters",
     "corsheaders",
     "rest_framework",
-    "rest_framework.authtoken",
+    # "rest_framework.authtoken",
     "djoser",
     "drf_spectacular",
     "users",
@@ -47,15 +48,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     # "django.middleware.security.SecurityMiddleware",
-    # "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     # "django.middleware.common.CommonMiddleware",
     # "django.middleware.csrf.CsrfViewMiddleware",
-    # "django.contrib.auth.middleware.AuthenticationMiddleware",
-    # "django.contrib.messages.middleware.MessageMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
     # "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
