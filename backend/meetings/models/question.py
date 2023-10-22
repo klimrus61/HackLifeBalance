@@ -18,4 +18,5 @@ class MeetingQuestion(models.Model):
         related_name="user_questions",
         on_delete=models.CASCADE,
     )
-    datetime = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

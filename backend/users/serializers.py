@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from users.models import User
+from users.models import User, Lecturer, LecturerMaterial
 
 from djoser.serializers import UserCreateSerializer as UserCreateSerializer_
 
@@ -9,9 +9,22 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "username", "first_name", "last_name", "roles")
+        fields = ("id", "first_name", "last_name", "roles")
 
 class UserCreateSerializer(UserCreateSerializer_):
     class Meta:
         model = User
         fields = ("id", "email", "first_name", "last_name", "password")
+
+
+class LecturerMaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LecturerMaterial
+        fields = "__all__"
+
+class LecturerSerializer(serializers.ModelSerializer):
+    lecturer_materials = LecturerMaterialSerializer(many=True)
+
+    class Meta:
+        model = Lecturer
+        fields = "__all__"
