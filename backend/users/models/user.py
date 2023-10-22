@@ -9,7 +9,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
 
-# Create your models here.
 class UserManager(BaseUserManager):
     def create_user(self, email,  password=None, **kwargs):
         if not email:
@@ -19,6 +18,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
+    
     def create_superuser(self, email,  password=None, **kwargs):
         kwargs.setdefault('is_active', True)
         kwargs.setdefault('is_staff', True)

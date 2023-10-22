@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Meeting
+from meetings.models import Meeting
 
 class MeetingModelSerializer(serializers.ModelSerializer):
     class Meta:

@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -52,7 +52,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -144,6 +143,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+#     'rest_framework_simplejwt.authentication.JWTAuthentication',
+)
+
 # static
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
@@ -211,7 +216,10 @@ DJOSER = {
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://185.244.51.249:8080', 'http://127.0.0.1:8000','http://localhost:3000', "http://localhost:8000"],
     "SERIALIZERS": {
-        "current_user": "users.serializers.UserSerializer"
+        "current_user": "users.serializers.UserSerializer",
+        "user": "users.serializers.UserCreateSerializer",
+        "user_create": "users.serializers.UserCreateSerializer",
+        "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
     "PERMISSIONS":  {
         'activation': ['rest_framework.permissions.IsAdminUser'],
@@ -226,11 +234,7 @@ DJOSER = {
     }
 }
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-#     'rest_framework_simplejwt.authentication.JWTAuthentication',
-)
+
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '514415217914-v3v159jsigrgs6dirmg5p2g9a2q5lo5v.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'

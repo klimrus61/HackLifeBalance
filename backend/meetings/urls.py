@@ -3,10 +3,10 @@ from django.urls import include, path
 
 from rest_framework import routers
 
-from meetings.views import MeetingViewSet
+from meetings.views import MeetingGETViewSet
 
 router = routers.DefaultRouter()
-router.register("", MeetingViewSet, "meetings")
+router.register("", MeetingGETViewSet, "meetings")
 
 
 urlpatterns = [
