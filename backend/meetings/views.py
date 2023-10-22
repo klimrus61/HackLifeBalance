@@ -1,11 +1,10 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema, extend_schema_view
-from meetings.models import Meeting, MeetingQuestion
-from meetings.serializers import MeetingModelSerializer, MeetingQuestionSerializer
+from meetings.models import Meeting, MeetingQuestion, MeetingOffer
+from meetings.serializers import MeetingModelSerializer, MeetingQuestionSerializer, MeetingOfferSerializer
 from rest_framework import decorators, mixins, viewsets
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from users.permissions import Moderator
 
 
@@ -33,4 +32,11 @@ class QuestionViewSet(viewsets.ModelViewSet):
     serializer_class = MeetingQuestionSerializer
     permission_classes = [IsAuthenticated]
     queryset = MeetingQuestion.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+
+@extend_schema(tags=["meeting"])
+class MeetingOfferViewSet(viewsets.ModelViewSet):
+    serializer_class = MeetingOfferSerializer
+    permission_classes = [IsAuthenticated]
+    queryset =  MeetingOffer.objects.all()
     filter_backends = (DjangoFilterBackend,)
