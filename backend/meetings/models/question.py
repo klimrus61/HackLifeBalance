@@ -3,7 +3,6 @@ from django.utils.text import gettext_lazy as _
 
 
 class MeetingQuestion(models.Model):
-    
     meeting = models.ForeignKey(
         "Meeting",
         verbose_name=_("meeting"),

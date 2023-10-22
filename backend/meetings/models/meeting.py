@@ -16,12 +16,10 @@ class Meeting(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
-    start_time = models.DateTimeField(
-
-    )
+    start_time = models.DateTimeField()
     image = models.ImageField(
-        upload_to='meetings/', 
-        height_field=100, 
+        upload_to="meetings/",
+        height_field=100,
         width_field=100,
         blank=True,
         null=True,
@@ -33,12 +31,11 @@ class Meeting(models.Model):
         blank=True,
     )
     users = models.ManyToManyField(
-        'users.User',
+        "users.User",
         verbose_name=_("meeting learner"),
         help_text=_("please chose learners for this meeting"),
         related_name="user_meetings",
         blank=True,
-
     )
     is_active = models.BooleanField(
         _("group is active"),
@@ -64,19 +61,22 @@ class Meeting(models.Model):
         verbose_name = _("Meeting")
         verbose_name_plural = _("Meeting")
 
+
 class MeetingType(models.Model):
     title = models.CharField(
         _("meeting title"),
         help_text=_("please specify the title of the meeting"),
         max_length=255,
     )
+
     class Meta:
         verbose_name = _("Meeting type")
         verbose_name_plural = _("Meeting types")
 
+
 class MeetingOffer(models.Model):
     lecturer = models.ForeignKey(
-        'users.Lecturer',
+        "users.Lecturer",
         verbose_name=_("lecturer"),
         help_text=_("please chose lecturer for this meeting"),
         related_name="lecturer_meetings",
@@ -88,6 +88,7 @@ class MeetingOffer(models.Model):
         null=True,
         blank=True,
     )
+
 
 class MeetingAtention(models.Model):
     pass

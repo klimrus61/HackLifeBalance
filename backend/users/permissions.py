@@ -9,4 +9,3 @@ class Moderator(IsAuthenticated):
             or request.user.is_admin
             or request.user_is_superuser
         )
-

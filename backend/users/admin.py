@@ -13,5 +13,5 @@ class UserRoleAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    ordering = ('email',)
-    list_display =  ('email',)
+    ordering = ("email",)
+    list_display = ("email",)

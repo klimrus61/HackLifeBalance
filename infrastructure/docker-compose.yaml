@@ -50,13 +50,7 @@ services:
       context: ${PWD}
       dockerfile: docker/Dockerfile
     restart: always
-<<<<<<< HEAD:docker/compose/prod.yml
-    volumes:
-      - ${PWD}/:/app
-    env_file: ${PWD}/.env
-=======
     env_file: .env
->>>>>>> dev:infrastructure/docker-compose.yaml
     command: sh -c "
       python manage.py collectstatic --noinput &&
       python manage.py migrate &&

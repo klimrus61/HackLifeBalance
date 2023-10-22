@@ -19,11 +19,8 @@ class Lecturer(models.Model):
         _("proffession"),
         help_text=("the direction of the profession"),
     )
-    descriptions = models.TextField(
-        _("descriptions"),
-        help_text=_("please chose solution status"),
-        null=True
-    )
+    descriptions = models.TextField(_("descriptions"), help_text=_("please chose solution status"), null=True)
+
 
 class LecturerMaterial(models.Model):
     lecturer = models.ForeignKey(

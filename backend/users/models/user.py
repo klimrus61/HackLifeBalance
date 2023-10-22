@@ -1,16 +1,17 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    AbstractUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 from django.utils.text import gettext_lazy as _
 
 from core.constants.users import RoleTypes
 
-from django.contrib.auth.models import BaseUserManager
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.db import models
-
 
 class UserManager(BaseUserManager):
-    def create_user(self, email,  password=None, **kwargs):
+    def create_user(self, email, password=None, **kwargs):
         if not email:
             raise ValueError("Users must have an email address")
         email = self.normalize_email(email)
@@ -18,19 +19,19 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
-    
-    def create_superuser(self, email,  password=None, **kwargs):
-        kwargs.setdefault('is_active', True)
-        kwargs.setdefault('is_staff', True)
-        kwargs.setdefault('is_superuser', True)
-        if kwargs.get('is_active') is not True:
-            raise ValueError('Superuser must be active')
-        if kwargs.get('is_staff') is not True:
-            raise ValueError('Superuser must be staff')
-        if kwargs.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True')
+
+    def create_superuser(self, email, password=None, **kwargs):
+        kwargs.setdefault("is_active", True)
+        kwargs.setdefault("is_staff", True)
+        kwargs.setdefault("is_superuser", True)
+        if kwargs.get("is_active") is not True:
+            raise ValueError("Superuser must be active")
+        if kwargs.get("is_staff") is not True:
+            raise ValueError("Superuser must be staff")
+        if kwargs.get("is_superuser") is not True:
+            raise ValueError("Superuser must have is_superuser=True")
         return self.create_user(email, password, **kwargs)
-    
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = None
@@ -42,8 +43,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     @property
     def is_employee(self):
@@ -57,7 +58,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_moderator(self):
         return self.roles and self.roles.filter(role=RoleTypes.MODERATOR).exists()
 
-
     def get_full_name(self):
         return f"{self.first_name}{self.last_name}"
 
@@ -66,5 +66,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
-    
