@@ -29,3 +29,12 @@ python backend/manage.py runserver
 
 Backend задеплоин по адресу находиться документация к апи
 http://185.244.51.249:8080/api/v1/schema/swagger-ui/
+
+Модератор для проверки
+авторизация по JWT токену
+```
+{
+"email": "exemple@mail.ru",
+"password": "QAWSed12345"
+}
+```
