@@ -15,3 +15,4 @@ class UserRoleAdmin(admin.ModelAdmin):
 class UserAdmin(UserAdmin):
     ordering = ("email",)
     list_display = ("email",)
+    list_display = ['email', 'first_name','last_name',]

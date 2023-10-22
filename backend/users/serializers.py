@@ -1,6 +1,6 @@
 from djoser.serializers import UserCreateSerializer as UserCreateSerializer_
 from rest_framework import serializers
-from users.models import Lecturer, LecturerMaterial, User
+from users.models import Lecturer, LecturerMaterial, User, UserRole
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -28,4 +28,9 @@ class LecturerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lecturer
+        fields = "__all__"
+
+class UserRoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserRole
         fields = "__all__"
