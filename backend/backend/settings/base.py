@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
+    
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -51,17 +51,34 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ORIGIN_WHITELIST = [
-     "http://localhost:3000",
-     "http://127.0.0.1:3000", 
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://185.244.51.249:8080",
 ]
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "backend.urls"
@@ -115,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CSRF_TRUSTED_ORIGINS = ["https://rstu-skillget.ddns.net", "http://rstu-skillget.ddns.net"]
+CSRF_TRUSTED_ORIGINS = ["https://rstu-skillget.ddns.net", "http://rstu-skillget.ddns.net", "http://localhost:3000", "http://127.0.0.1:8000"]
 
 AUTH_USER_MODEL = "users.User"
 
@@ -192,9 +209,9 @@ SIMPLE_JWT = {
 DJOSER = {
     'LOGIN_FIELD': 'email',
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://127.0.0.1:8000', 'http://127.0.0.1:8000','http://127.0.0.1:8000/login'],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://185.244.51.249:8080', 'http://127.0.0.1:8000','http://localhost:3000', "http://localhost:8000"],
     "SERIALIZERS": {
-        # "current_user": "users.serializers.UserSerializer"
+        "current_user": "users.serializers.UserSerializer"
     },
     "PERMISSIONS":  {
         'activation': ['rest_framework.permissions.IsAdminUser'],
